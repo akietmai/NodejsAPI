@@ -89,11 +89,14 @@ const newUserDeck = async (req, res, next) => {
 };
 
 const secret = async (req, res, next) => {
-  console.log("Called to secret function.");
+  return res.status(200).json({ resources: true });
 };
 
 const signIn = async (req, res, next) => {
-  console.log("Called to signin function.");
+  const token = encodedToken(req.user._id);
+
+  res.setHeader("Authorization", token);
+  return res.status(200).json({ success: true });
 };
 
 const signUp = async (req, res, next) => {
