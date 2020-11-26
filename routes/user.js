@@ -19,6 +19,13 @@ router
   .post(validateBody(schemas.userSchema), UserController.newUser);
 
 router
+  .route("/auth/google")
+  .post(
+    passport.authenticate("google-plus-token", { session: false }),
+    UserController.authGoogle
+  );
+
+router
   .route("/secret")
   .get(passport.authenticate("jwt", { session: false }), UserController.secret);
 
